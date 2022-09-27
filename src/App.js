@@ -43,20 +43,26 @@ export default function App() {
     let a = [];
     for (let i = n - 1; i >= -n + 1; i--) {
       for (let j = n - 1; j >= -n + 1; j--) {
-        
+        for (let k = n - 1; k >= -n + 1; k--) {
+          if (i + j + k === 0) {
+            a.push([i, j, k]);
+          } else {
+            continue;
+          }
+        }
       }
     }
     return a;
   }
-  if (i + j === n || i + j === -n) {
-    continue;
-  } else if (i === n - 1 && j === n - 1) {
-    continue;
-  } else if (i === -n + 1 && j === -n + 1) {
-    continue;
-  } else {
-    a.push([i, j]);
-  }
+  console.log(cressateCO());
+  console.log(cressateCO(3));
+  console.log(cressateCO(4));
+
+  //  else if (i === -n + 1 && j === -n + 1) {
+  //   continue;
+  // } else {
+  //   a.push([i, j]);
+  // }
   function add(n = 2) {
     var max = n + (n - 1);
     let a = [];
