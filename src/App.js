@@ -55,18 +55,11 @@ export default function App() {
     return a;
   }
   console.log(cressateCO());
-  console.log(cressateCO(3));
-  console.log(cressateCO(4));
-
-  //  else if (i === -n + 1 && j === -n + 1) {
-  //   continue;
-  // } else {
-  //   a.push([i, j]);
-  // }
   function add(n = 2) {
     var max = n + (n - 1);
     let a = [];
     for (let i = n - 1; i >= -n + 1; i--) {
+      console.log(max - Math.abs(i));
       a.push(max - Math.abs(i));
     }
     return a;
@@ -75,25 +68,51 @@ export default function App() {
   return (
     <div
       style={{
-        display: 'flex',
-        flexDirection: 'row',
         margin: '1%',
-        alignItems: 'center',
-        justifyContent: 'center',
+        position: 'relative',
       }}
     >
-      {add(2).map((noItemPerCol) => (
-        <div style={{ display: 'flex', flexDirection: 'column' }}>
-          {[...Array(noItemPerCol)].map((e, i) => (
-            <Otha pt={daa(hex)} />
-          ))}
+      {[...cressateCO()].map((e, i) => (
+        <div
+          style={{
+            position: 'absolute',
+            top:
+              e[0] === 0 && e[1] === 0 && e[2] === 0
+                ? '250px'
+                : e[0] === 1 && e[1] === 0 && e[2] === -1
+                ? '0px'
+                : e[0] === -1 && e[1] === 0 && e[2] === +1
+                ? '500px'
+                : (e[0] === 0 && e[1] === 1 && e[2] === -1) ||
+                  (e[0] === 1 && e[1] === -1 && e[2] === 0)
+                ? '100px'
+                : (e[0] === 0 && e[1] === -1 && e[2] === +1) ||
+                  (e[0] === -1 && e[1] === 1 && e[2] === 0)
+                ? '400px'
+                : '',
+            left:
+              (e[0] === 0 && e[1] === 0 && e[2] === 0) ||
+              (e[0] === 1 && e[1] === 0 && e[2] === -1) ||
+              (e[0] === -1 && e[1] === 0 && e[2] === 1)
+                ? '300px'
+                : (e[0] === 1 && e[1] === -1 && e[2] === 0) ||
+                  (e[0] === 1 && e[1] === 0 && e[2] === -1)
+                ? '0px'
+                : (e[0] === -1 && e[1] === 1 && e[2] === 0) ||
+                  (e[0] === -1 && e[1] === 0 && e[2] === -1) ||
+                  (e[0] === 0 && e[1] === 1 && e[2] === -1)
+                ? '600px'
+                : '',
+          }}
+        >
+          <Otha pt={daa(hex)} e={e.join('')} />
         </div>
       ))}
     </div>
   );
 }
 
-function Otha({ pt }) {
+function Otha({ pt, e }) {
   return (
     <svg
       class="hexagon-mask"
@@ -106,7 +125,7 @@ function Otha({ pt }) {
     >
       <polygon points={pt} stroke="black"></polygon>
       <text x="500" y="600" text-anchor="middle" fill="black" font-size="400">
-        X
+        {e}
       </text>
     </svg>
   );
